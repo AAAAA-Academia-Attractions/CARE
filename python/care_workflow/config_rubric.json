@@ -1,0 +1,172 @@
+{
+  "rubric_version": "v1.2.0",
+  "description": "Clinical rubric for scoring patient deterioration risk in the ICU. Calibrated to detect active worsening trajectories while accounting for typical ICU baseline abnormalities. Uses multiple features in combination to improve diagnostic accuracy.",
+  "categories": [
+    {
+      "name": "VERY_LIKELY_WORSENING",
+      "severity_level": 5,
+      "description": "Critical deterioration: profound prolonged hypotension, severe lactic acidosis, or multi-organ failure with hemodynamic instability.",
+      "conditions": [
+        {
+          "logic": "OR",
+          "rules": [
+            {
+              "logic": "AND",
+              "rules": [
+                { "feature": "map_low_minutes_last1h_thr65", "op": ">=", "value": 30 },
+                { "feature": "lactate_latest_6h", "op": ">=", "value": 2.0 }
+              ]
+            },
+            {
+              "logic": "AND",
+              "rules": [
+                { "feature": "map_low_minutes_last1h_thr60", "op": ">=", "value": 15 }
+              ]
+            },
+            {
+              "logic": "AND",
+              "rules": [
+                { "feature": "lactate_latest_6h", "op": ">=", "value": 4.0 }
+              ]
+            },
+            {
+              "logic": "AND",
+              "rules": [
+                { "feature": "hr_median_last1h", "op": ">", "value": 120 },
+                { "feature": "map_low_minutes_last1h_thr65", "op": ">=", "value": 15 }
+              ]
+            },
+            {
+              "logic": "AND",
+              "rules": [
+                { "feature": "norepi_eq_dose_max_1h", "op": ">=", "value": 0.2 },
+                { "feature": "map_low_minutes_last1h_thr65", "op": ">=", "value": 10 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "LIKELY_WORSENING",
+      "severity_level": 4,
+      "description": "Evidence of active deterioration: emerging shock pattern with hemodynamic compromise together with perfusion or metabolic derangement.",
+      "conditions": [
+        {
+          "logic": "OR",
+          "rules": [
+            {
+              "logic": "AND",
+              "rules": [
+                { "feature": "map_low_minutes_last1h_thr65", "op": ">=", "value": 10 },
+                { "feature": "lactate_latest_6h", "op": ">=", "value": 2.0 }
+              ]
+            },
+            {
+              "logic": "AND",
+              "rules": [
+                { "feature": "map_low_minutes_last1h_thr65", "op": ">=", "value": 15 }
+              ]
+            },
+            {
+              "logic": "AND",
+              "rules": [
+                { "feature": "lactate_latest_6h", "op": ">=", "value": 2.5 },
+                { "feature": "hr_median_last1h", "op": ">=", "value": 95 }
+              ]
+            },
+            {
+              "logic": "AND",
+              "rules": [
+                { "feature": "norepi_eq_dose_max_1h", "op": ">=", "value": 0.15 },
+                { "feature": "urine_output_mlkghr_6h", "op": "<", "value": 0.5 }
+              ]
+            },
+            {
+              "logic": "AND",
+              "rules": [
+                { "feature": "map_low_minutes_last1h_thr65", "op": ">=", "value": 5 },
+                { "feature": "urine_output_mlkghr_6h", "op": "<", "value": 0.3 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "POTENTIAL_OCCULT_SHOCK",
+      "severity_level": 3,
+      "description": "Subjectively calm but with objective deviations suggesting possible occult instability. May be compensated shock or early deterioration.",
+      "conditions": [
+        {
+          "logic": "OR",
+          "rules": [
+            {
+              "logic": "AND",
+              "rules": [
+                { "feature": "map_low_minutes_last1h_thr65", "op": ">=", "value": 5 },
+                { "feature": "lactate_latest_6h", "op": ">=", "value": 1.5 }
+              ]
+            },
+            {
+              "logic": "AND",
+              "rules": [
+                { "feature": "map_low_minutes_last1h_thr65", "op": ">=", "value": 10 }
+              ]
+            },
+            {
+              "logic": "AND",
+              "rules": [
+                { "feature": "lactate_latest_6h", "op": ">=", "value": 2.0 }
+              ]
+            },
+            {
+              "logic": "AND",
+              "rules": [
+                { "feature": "norepi_eq_dose_max_1h", "op": ">=", "value": 0.1 }
+              ]
+            },
+            {
+              "logic": "AND",
+              "rules": [
+                { "feature": "urine_output_mlkghr_6h", "op": "<", "value": 0.5 },
+                { "feature": "hr_median_last1h", "op": ">=", "value": 90 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "LIKELY_STABLE",
+      "severity_level": 2,
+      "description": "Patient is around their ICU baseline. Mild isolated deviations but no evidence of acute failure or worsening trajectory.",
+      "conditions": [
+        {
+          "logic": "OR",
+          "rules": [
+            {
+              "logic": "AND",
+              "rules": [
+                { "feature": "map_low_minutes_last1h_thr65", "op": "<", "value": 5 },
+                { "feature": "hr_median_last1h", "op": "<=", "value": 100 }
+              ]
+            },
+            {
+              "logic": "AND",
+              "rules": [
+                { "feature": "pain_max_last1h", "op": ">=", "value": 4 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "VERY_LIKELY_STABLE",
+      "severity_level": 1,
+      "description": "Patient is stable and well-compensated with no objective signs of deterioration.",
+      "conditions": []
+    }
+  ]
+}

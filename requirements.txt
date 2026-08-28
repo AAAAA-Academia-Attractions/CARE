@@ -1,0 +1,10 @@
+duckdb
+jinja2
+loguru
+matplotlib
+numpy
+openai
+pandas
+pydantic
+python-dotenv
+scikit-learn
