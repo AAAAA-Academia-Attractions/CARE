@@ -1,6 +1,7 @@
-# CARE
+# CARE: Privacy-Compliant Agentic Reasoning with Evidence Discordance
 
 This package contains the CARE workflow and the utilities needed to construct and evaluate MIMIC-DOS from a locally licensed MIMIC-IV v3.1 source.
+
 
 ## Contents
 
@@ -75,4 +76,18 @@ export FEATURE_SOURCE=locked_csv
 
 ```bash
 python python/care_workflow/run_care_inference.py --sample-size 1000
+```
+
+## Citation 
+
+```bibtex
+@misc{liu2026careprivacycompliantagenticreasoning,
+      title={CARE: Privacy-Compliant Agentic Reasoning with Evidence Discordance}, 
+      author={Haochen Liu and Weien Li and Rui Song and Zeyu Li and Chun Jason Xue and Xiao-Yang Liu and Sam Nallaperuma and Xue Liu and Ye Yuan},
+      year={2026},
+      eprint={2604.01113},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2604.01113}, 
+}
 ```
