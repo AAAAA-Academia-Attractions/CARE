@@ -1,6 +1,6 @@
 # CARE: Privacy-Compliant Agentic Reasoning with Evidence Discordance
 
-We are happy to announce that this project is accepted by EMNLP 2026! This repository contains the official implementation for the paper.
+We are happy to announce that this project is accepted by EMNLP 2026! This repository contains the official implementation for the paper. 
 
 This package contains the CARE workflow and the utilities needed to construct and evaluate MIMIC-DOS from a locally licensed MIMIC-IV v3.1 source.
 
